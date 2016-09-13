@@ -139,8 +139,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 
-
-
+                        
                           <h4 class="blue">
                                    <span class="label label-primary arrowed-in-right">
                                       <i class="ace-icon fa fa-cog smaller-80 align-middle"></i>

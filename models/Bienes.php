@@ -48,6 +48,7 @@ use Yii;
  * @property boolean $is_colectivo
  * @property string $motivo_indisponibilidad
  * @property boolean $is_in
+ * @property boolean $is_asegurable
  * @property Responsables $codrespDirecto
  * @property Clasificacion $codclas0
  * @property Lineas $codlin0
@@ -80,7 +81,8 @@ class Bienes extends \yii\db\ActiveRecord
             [['costo'], 'number'],
             [['foto', 'descripcion', 'foto1'], 'string'],
             [['fcreacion', 'fdesinc'], 'safe'],
-            [['is_colectivo', 'is_in'], 'boolean'],
+            [['is_colectivo', 'is_in', 'is_asegurable'], 'boolean'],
+            [['codigo', 'serial'], 'string', 'max' => 50],
             [['codigo', 'serial'], 'string', 'max' => 50],
             [['observacion', 'localizacion', 'motivo_indisponibilidad'], 'string', 'max' => 400],
             [['marca'], 'string', 'max' => 80],
@@ -136,6 +138,8 @@ class Bienes extends \yii\db\ActiveRecord
             'is_colectivo' => 'Bien de Uso Colectivo',
             'motivo_indisponibilidad' => 'Motivo Indisponibilidad',
             'is_in' => 'Is In',
+            'is_asegurable' => 'Es Asegurable',
+
         ];
     }
 

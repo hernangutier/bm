@@ -101,6 +101,20 @@ $this->params['breadcrumbs'][] = $this->title;
 
    <?php
 
+         echo  $form->field($model, 'is_asegurable')->widget(SwitchInput::classname(), [
+                   'pluginOptions' => [
+                           'onText' => 'Si',
+                           'offText' => 'No',
+                           'onColor' => 'success',
+                           'offColor' => 'danger',
+                   ]
+
+           ]);
+
+   ?>
+
+   <?php
+
          echo  $form->field($model, 'activo')->widget(SwitchInput::classname(), [
                    'pluginOptions' => [
                            'onText' => 'Activo',
