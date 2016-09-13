@@ -149,6 +149,14 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <b>Bienes Afectados En Su Totalidad</b>
                                   </span>
                           </h4>
+                          <h4 class="blue">
+
+
+                                  <span class="label label-primary arrowed-in arrowed-right">
+                                    <i class="ace-icon fa fa-code-fork smaller-80 align-middle"></i>
+                                    <b>Bienes Afectados En Su Totalidad</b>
+                                  </span>
+                          </h4>
 
 
 
