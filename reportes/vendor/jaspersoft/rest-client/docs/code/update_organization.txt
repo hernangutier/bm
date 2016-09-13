@@ -1,0 +1,9 @@
+$search = $c->organizationService()->searchOrganization('organization_wave');
+$organization = $search[0];
+$organization->tenantDesc = "Wave producing organization";
+
+try {
+    $c->organizationService()->updateOrganization($organization);
+} catch (Exception $e) {
+    printf('Unable to modify organization: %s', $e->getMessage());
+}

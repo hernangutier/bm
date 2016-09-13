@@ -1,0 +1,27 @@
+// SimpleTrigger
+$trigger = new SimpleTrigger();
+$trigger->timezone = "America/Los_Angeles";
+$trigger->startType = 2;
+$trigger->startDate = "2025-10-26 10:00";
+$trigger->occurrenceCount = 1;
+
+// Source
+$source = new Source();
+$source->reportUnitURI = "/adhoc/topics/Cascading_multi_select_topic";
+$source->parameters = array("Country_multi_select" => array("Mexico"),
+                            "Country_name_single_select" => array("Chin-Lovell Engineering Associates"),
+                            "Country_state_multi_select" => array("DF", "Jalisco", "Mexico"));
+
+// Repository Destination
+$repoDest = new RepositoryDestination();
+$repoDest->folderURI = $f->uri;
+
+$job = new Job("Sample Job Name", $trigger, $source, "Cascading_multi_select_test",
+                array("PDF", "XLS"), $repoDest);
+$job->description = "Sample Description";
+
+try {
+    $c->jobService()->createJob($job);
+} catch (\Exception e) {
+    printf('Caught Exception: %s', $e->getMessage());
+}
