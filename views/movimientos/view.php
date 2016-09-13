@@ -146,7 +146,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                                   <span class="label label-primary arrowed-in arrowed-right">
                                     <i class="ace-icon fa fa-code-fork smaller-80 align-middle"></i>
-                                    <b>Datos de Ubicación</b>
+                                    <b>Bienes Afectados</b>
                                   </span>
                           </h4>
 
