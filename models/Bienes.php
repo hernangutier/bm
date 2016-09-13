@@ -146,7 +146,7 @@ class Bienes extends \yii\db\ActiveRecord
     public function scenarios()
     {
         $scenarios = parent::scenarios();
-        $scenarios[self::SCENARIO_MIGRACION] = ['codcat','estado_fisico', 'estado_uso','is_colectivo'];
+        $scenarios[self::SCENARIO_MIGRACION] = ['codcat','estado_fisico', 'estado_uso','is_colectivo','is_asegurable'];
 
 
         return $scenarios;

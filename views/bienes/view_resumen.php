@@ -33,11 +33,21 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
                           </ul>
-  </div>
+
       <a href="<?= Url::to(['/bienes/update','id'=>$model->cod]) ?>" class="btn btn-primary">
                               <i class="ace-icon fa fa-pencil-square-o align-top bigger-125"></i>
                               Actualizar
       </a>
+      <?php
+          if ($model->is_asegurable){
+              echo '<a href="' . Url::to(['/bienes/set-seguro','id'=>$model->cod]) . '" class="btn btn-info">
+                                      <i class="ace-icon fa fa-pencil-square-o align-top bigger-125"></i>
+                                      Actualizar Poliza
+              </a>';
+          }
+       ?>
+
+      </div>
   </div>
 
 

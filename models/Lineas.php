@@ -12,6 +12,7 @@ use Yii;
  * @property integer $cod
  */
 class Lineas extends \yii\db\ActiveRecord
+
 {
     /**
      * @inheritdoc
@@ -31,7 +32,7 @@ class Lineas extends \yii\db\ActiveRecord
             [['descripcion'], 'string', 'max' => 80],
             [['codigo'], 'string', 'max' => 20],
             [['codigo'], 'unique'],
-          
+
         ];
     }
 

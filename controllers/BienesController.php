@@ -10,7 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\models\DesincorporacionesDt;
 use app\models\MovimientosDt;
-
+use app\models\Seguros;
 /**
  * BienesController implements the CRUD actions for Bienes model.
  */
@@ -118,7 +118,15 @@ class BienesController extends Controller
                   }
         }
 
+        public function actionSetSeguro($id){
+          $count=Seguros::findOne(['codbien'=> $id,'active'=>true]);
+          if (!(is_null($count))){
+              $this->redirect(['/seguros/update','id'=>$count->cod]);
+          } else {
+             $this->redirect(['/seguros/create','id'=>$id]);
+          }
 
+        }
 
     /**
      * Creates a new Bienes model.
