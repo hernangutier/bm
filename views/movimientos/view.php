@@ -142,21 +142,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
                           <h4 class="blue">
-
-
-                                  <span class="label label-primary arrowed-in arrowed-right">
-                                    <i class="ace-icon fa fa-code-fork smaller-80 align-middle"></i>
-                                    <b>Bienes Afectados En Su Totalidad</b>
-                                  </span>
+                                   <span class="label label-primary arrowed-in-right">
+                                      <i class="ace-icon fa fa-cog smaller-80 align-middle"></i>
+                                            Bienes Afectados
+                                   </span>
                           </h4>
-                          <h4 class="blue">
+                      <?php
+                          echo Yii::$app->controller->renderPartial('view_bienes',['model'=>$model]);
+                       ?>
 
-
-                                  <span class="label label-primary arrowed-in arrowed-right">
-                                    <i class="ace-icon fa fa-code-fork smaller-80 align-middle"></i>
-                                    <b>Bienes Afectados En Su Totalidad</b>
-                                  </span>
-                          </h4>
 
 
 
