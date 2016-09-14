@@ -5,13 +5,14 @@ use yii\widgets\ActiveForm;
 use yii\bootstrap\Tabs;
 use kartik\select2\Select2;
 use yii\helpers\ArrayHelper;
+use kartik\money\MaskMoney;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Seguros */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="seguros-basicos">
+
 
 
 
@@ -45,18 +46,25 @@ use yii\helpers\ArrayHelper;
   <?= $form->field($model, 'otra_aseguradora')->textInput(['maxlength' => true]) ?>
 
 
-  <?= $form->field($model, 'moneda')->textInput() ?>
+  <?= $form->field($model, 'moneda')->dropDownList(
+                  ['1'=>'Bolívares',
+                  '2'=>'Dólares',
+                  '3'=>'Euros',
+                  '4'=>'Otra Moneda',
+
+                  ]
+                )
+
+
+  ?>
 
   <?= $form->field($model, 'especifique_moneda')->textInput(['maxlength' => true]) ?>
 
-  <?= $form->field($model, 'monto')->textInput() ?>
+
+  <?= $form->field($model, 'monto')->widget(MaskMoney::classname(), [
+      'pluginOptions' => [
 
 
-
-
-
-
-
-
-
-</div>
+          'allowNegative' => false
+          ]
+      ]); ?>

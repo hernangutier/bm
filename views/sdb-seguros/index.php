@@ -10,16 +10,14 @@ use yii\grid\GridView;
 $this->title = 'Catalogo de Seguros SUDEBIP';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="sdb-seguros-index">
+<div class="container">
 
-    
-            <div class="panel panel-primary">
-                  <div class="panel-heading">Catalogo de Seguros SUDEBIP</div>
-                      <div class="panel-body">
-                        
-                  
-    
-        
+
+
+
+
+
+
 
     <p>
         <?= Html::a('Crear Seguro', ['create'], ['class' => 'btn btn-success']) ?>
@@ -33,11 +31,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'codigo',
             'razon',
-            
+
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-                </div>
-        </div>
 </div>

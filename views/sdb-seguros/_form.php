@@ -8,7 +8,7 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="sdb-seguros-form">
+
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -16,12 +16,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'razon')->textInput(['maxlength' => true]) ?>
 
-    
+
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Crear' : 'Actualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton('<i class="ace-icon fa fa-floppy-o bigger-120 blue"></i> Guardar', ['class' => 'btn btn-white btn-info btn-bold']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
-
-</div>

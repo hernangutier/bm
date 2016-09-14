@@ -43,15 +43,16 @@ class Seguros extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['cod', 'f_ini', 'f_fin'], 'required'],
+            [['f_ini', 'f_fin','codaseguradora','monto','npoliza'], 'required'],
             [['cod', 'codaseguradora', 'moneda', 'tipo_cobertura', 'codbien'], 'integer'],
             [['monto'], 'number'],
             [['tipo'], 'string'],
-            [['f_ini', 'f_fin'], 'safe'],
+
             [['active'], 'boolean'],
             [['otra_aseguradora', 'especifique_tipo_cobertura', 'descripcion_cobertura'], 'string', 'max' => 100],
             [['npoliza', 'especifique_moneda'], 'string', 'max' => 30],
-            [['resp_civil'], 'string', 'max' => 1]
+            [['resp_civil'], 'string', 'max' => 1],
+            ['monto', 'validateMonto'],
         ];
     }
 
@@ -78,6 +79,12 @@ class Seguros extends \yii\db\ActiveRecord
             'codbien' => 'Codbien',
             'active' => 'Active',
         ];
+    }
+
+    public function validateMonto(){
+      if ($this->monto<=0){
+        return $this->addError('monto','Monto Invalido');
+      }
     }
 
     /**

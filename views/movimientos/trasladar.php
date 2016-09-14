@@ -77,14 +77,7 @@ use yii\helpers\ArrayHelper;
                                 <div class="container">
 
 
-                                <?= $form->field($model,'fecha')->widget(DatePicker::classname(), [
-                                'options' => ['placeholder' => 'Ingrese Fecha del Movimiento ...'],
-                                'pluginOptions' => [
-                                    'autoclose'=>true,
-                                    'format'=>'yyyy-mm-dd',
-                                ]
-                                ])
-                                ?>
+                              
 
                                 <?=
                                     $form->field($model, 'coduser_origen')->widget(Select2::classname(), [

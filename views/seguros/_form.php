@@ -10,7 +10,7 @@ use yii\helpers\ArrayHelper;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="container">
+
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -54,7 +54,7 @@ use yii\helpers\ArrayHelper;
 
 
                       </div>
-                    </div>
+        </div>
 
 
 
@@ -64,5 +64,3 @@ use yii\helpers\ArrayHelper;
     </div>
 
     <?php ActiveForm::end(); ?>
-
-</div>

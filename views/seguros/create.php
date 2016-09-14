@@ -9,7 +9,7 @@ use yii\helpers\Html;
 $this->title = Yii::t('app', 'Actualizar Poliza a: ' . $model->codbien0->codigo);
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="seguros-create">
+<div class="container">
 
 
 

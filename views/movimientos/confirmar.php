@@ -144,7 +144,7 @@ $(document).ready(function() {
                                       <?=
                                           $form->field($model, 'observaciones')->textarea(['rows' => 6]);
                                       ?>
-                                        
+
 
                               </div>
 

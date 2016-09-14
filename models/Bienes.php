@@ -286,6 +286,23 @@ class Bienes extends \yii\db\ActiveRecord
       }
 
     }
+
+    public static function getListEstadosUso(){
+      return [
+            ['id'=>1,'descripcion'=>'En Uso'],
+            ['id'=>2,'descripcion'=>'En Comodato'],
+            ['id'=>3,'descripcion'=>'En Arrendamiento'],
+            ['id'=>4,'descripcion'=>'En Mantenimiento'],
+            ['id'=>5,'descripcion'=>'En Reparación'],
+            ['id'=>6,'descripcion'=>'En proceso de disposoción'],
+            ['id'=>7,'descripcion'=>'En Desuso por Obsolecencia'],
+            ['id'=>8,'descripcion'=>'En Desuso por Inservibilidad'],
+            ['id'=>9,'descripcion'=>'En Desuso por Obsolecencia e Inservibilidad'],
+            ['id'=>10,'descripcion'=>'En Almacen o Deposito para su Asignación'],
+            ['id'=>11,'descripcion'=>'Otro Uso'],
+        ];
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */

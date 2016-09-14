@@ -70,6 +70,22 @@ $this->params['breadcrumbs'][] = $this->title;
                 'cod', 'descripcion'),['class'=>'form-control','prompt' => 'No Filtro']),
             ],
 
+            [
+                'attribute'=>'Estado Uso (SUDEBIP)',
+                'value'=>function($model){
+                  if (is_null($model->estado_uso)){
+                    return '';
+                  }  else {
+                      return $model->getEstadoUso();
+                  }
+
+                },
+                'filter' => Html::activeDropDownList($searchModel,
+                'estado_uso', ArrayHelper::map(app\models\Bienes::getListEstadosUso(),
+                'id', 'descripcion'),['class'=>'form-control','prompt' => 'No Filtro']),
+            ],
+
+
 
 
             // 'codresp_directo',

@@ -11,7 +11,6 @@ use kartik\widgets\DatePicker;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="seguros-detalles">
 
 
 
@@ -59,17 +58,3 @@ use kartik\widgets\DatePicker;
   ?>
 
   <?= $form->field($model, 'especifique_tipo_cobertura')->textInput(['maxlength' => true]) ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div>
