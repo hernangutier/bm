@@ -23,9 +23,11 @@ use Yii;
  * @property string $descripcion_cobertura
  * @property integer $codbien
  * @property boolean $active
+ * @property string $titulo
  *
  * @property Bienes $codbien0
 * @property SdbSeguros $codaseguradora0
+* @property SegurosExp[] $segurosExps
  */
 class Seguros extends \yii\db\ActiveRecord
 {
@@ -43,7 +45,7 @@ class Seguros extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['f_ini', 'f_fin','codaseguradora','monto','npoliza'], 'required'],
+            [['f_ini', 'f_fin','codaseguradora','monto','npoliza','titulo'], 'required'],
             [['cod', 'codaseguradora', 'moneda', 'tipo_cobertura', 'codbien'], 'integer'],
             [['monto'], 'number'],
             [['tipo'], 'string'],
@@ -53,7 +55,31 @@ class Seguros extends \yii\db\ActiveRecord
             [['npoliza', 'especifique_moneda'], 'string', 'max' => 30],
             [['resp_civil'], 'string', 'max' => 1],
             ['monto', 'validateMonto'],
+            [['titulo'], 'string', 'max' => 200],
         ];
+    }
+
+
+    public function getVigenciaHtml(){
+
+        if ($this->f_fin>date ("Y-m-d")){
+          return '<span class="label label-success arrowed-in arrowed-in-right">Vigente</span>';
+        } else {
+          return '<span class="label label-danger arrowed">Vencida</span>';
+        }
+
+    }
+
+    public function getTipoCobertura(){
+      if ($this->tipo_cobertura==1){
+        return 'Total';
+      }
+      if ($this->tipo_cobertura==2){
+        return 'Parcial';
+      }
+      if ($this->tipo_cobertura==3){
+        return 'Otro Tipo de Cobertura';
+      }
     }
 
     /**
@@ -101,6 +127,14 @@ class Seguros extends \yii\db\ActiveRecord
     public function getCodaseguradora0()
     {
         return $this->hasOne(SdbSeguros::className(), ['cod' => 'codaseguradora']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSegurosExps()
+    {
+        return $this->hasMany(SegurosExp::className(), ['codseg' => 'cod']);
     }
 
 }

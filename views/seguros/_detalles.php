@@ -58,3 +58,17 @@ use kartik\widgets\DatePicker;
   ?>
 
   <?= $form->field($model, 'especifique_tipo_cobertura')->textInput(['maxlength' => true]) ?>
+
+  <?php
+
+        echo  $form->field($model, 'resp_civil')->widget(SwitchInput::classname(), [
+                  'pluginOptions' => [
+                          'onText' => 'Si',
+                          'offText' => 'No',
+                          'onColor' => 'success',
+                          'offColor' => 'danger',
+                  ]
+
+          ]);
+
+  ?>
