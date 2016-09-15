@@ -47,7 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
   												</ul>
                           <?php
                             if ($model->status==0){
-                              echo '<a href="' . Url::to(['/movimientos/update','id'=>$model->cod]) . ' " class="btn btn-danger">
+                              echo '<a href="' . Url::to(['/movimientos/anular','id'=>$model->cod]) . ' " class="btn btn-danger">
                               												<i class="ace-icon fa fa-pencil-square-o align-top bigger-125"></i>
                               												Anular
                                   </a>';
@@ -139,7 +139,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 
-                        
+
                           <h4 class="blue">
                                    <span class="label label-primary arrowed-in-right">
                                       <i class="ace-icon fa fa-cog smaller-80 align-middle"></i>

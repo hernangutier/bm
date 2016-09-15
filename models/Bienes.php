@@ -237,6 +237,18 @@ class Bienes extends \yii\db\ActiveRecord
     }
 
 
+    public static function getPercentBm(){
+      $total=Bienes::find(['activo'=>1])->count();
+        $bm=Bienes::find()->andFilterWhere(['=', 'activo', 1])->andFilterWhere(['=', 'tipobien', 0])->count();
+        return number_format(($bm*100)/$total,2) . " %";
+    }
+
+    public static function getPercentBMuso(){
+      $total=Bienes::find(['activo'=>1])->count();
+        $bm=Bienes::find()->andFilterWhere(['=', 'activo', 1])->andFilterWhere(['=', 'tipobien', 1])->count();
+        return number_format(($bm*100)/$total,2) . " %";
+    }
+
     public static function getListSqlActives(){
       $sql="SELECT  * from vw_bienes_activos";
         return Yii::$app->db->createCommand($sql)->queryAll();

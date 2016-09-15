@@ -164,7 +164,7 @@ class Movimientos extends \yii\db\ActiveRecord
         return '<span class="label label-success arrowed-in arrowed-in-right">Procesada</span>';
       }
 
-      if ($this->status==3){
+      if ($this->status==2){
         return '<span class="label label-danger arrowed">Anulada</span>';
       }
     }

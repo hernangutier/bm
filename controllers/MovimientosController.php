@@ -128,6 +128,19 @@ class MovimientosController extends Controller
     }
     }
 
+    public function actionAnular($id){
+      $model=$this->findModel($id);
+
+      $model->status=2;
+      if ($model->load(Yii::$app->request->post()) && $model->save()) {
+          return $this->redirect(['view', 'id' => $model->cod]);
+      } else {
+      return $this->render('anular', [
+          'model' => $model,
+      ]);
+    }
+    }
+
     public  function actionPaso2($id){
       $model=$this->findModel($id);
       return $this->render('paso2', [
