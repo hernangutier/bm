@@ -1,5 +1,5 @@
 <?php
-
+use Yii;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use yii\helpers\Url;
@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                           </ul>
   </div>
-      <a href="<?= Url::to(['/seguros/update','id'=>$model->cod]) ?>" class="btn btn-primary">
+      <a href="<?= Url::to(['/seguros/update','id'=>$model->cod,'url'=>Url::current()]) ?>" class="btn btn-primary">
                               <i class="ace-icon fa fa-pencil-square-o align-top bigger-125"></i>
                               Actualizar
       </a>
@@ -184,19 +184,68 @@ $this->params['breadcrumbs'][] = $this->title;
 <br>
 
 <div class="bienes-index">
- <?php Pjax::begin(['id' => 'countries']) ?>
+
  <?= GridView::widget([
      'dataProvider' => $dataProvider,
 
      'columns' => [
          ['class' => 'yii\grid\SerialColumn'],
-         'filename',
+         [
+         'attribute'=>'filename',
+         'label'=>'Archivo Digital',
+
+         'value'=>  function ($searchModel, $key, $index, $widget) {
+             return Html::a($searchModel->filename,
+                 ['/seguros-exp/visor','id'=>$searchModel->cod,'url'=>Url::toRoute(['/seguros/view','id'=>$searchModel->codseg])],
+                 ['title'=>'Ver Archivo' ]);
+          },
+
+
+
+         'format'=>'raw'
+         ],
+
          'titulo',
+         ['class' => 'yii\grid\ActionColumn',
+             'template' => '{descargar}{delete}',
+
+              //--------- Actualizar ---
+          'buttons' => [
+
+
+
+
+            'descargar' => function ($url,$searchModel) {
+              return Html::a( '<i class="ace-icon fa  fa-download  bigger-120"></i>',
+                         ['seguros-exp/download','id'=>$searchModel->cod,'url'=> Url::current()],
+
+                         ['title'=>'Descargar Archivo',
+                         'class'=>'blue',
+                        ]);
+            },
+
+            'delete' => function ($url, $searchModel) {
+              return Html::a(Yii::t('app',''), ['seguros-exp/delete', 'id' => $searchModel->cod], [
+                  'class' => 'ace-icon fa fa-trash-o bigger-120 red',
+                  'data' => [
+                      'confirm' => Yii::t('app', 'Estas Seguro de Eliminar el Archivo: '.$searchModel->filename ),
+                      'method' => 'post',
+                  ],
+              ]);
+
+
+            },
+
+
+
+          ],
+         ],
+
 
        ],
 
  ]); ?>
- <?php Pjax::end() ?>
+
 
 </div>
 

@@ -4,10 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\select2\Select2;
 use yii\helpers\ArrayHelper;
+use  yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Seguros */
 /* @var $form yii\widgets\ActiveForm */
+/* @var $url yii\helpers\Url */
+
 ?>
 
 
@@ -61,6 +64,12 @@ use yii\helpers\ArrayHelper;
 
     <div class="form-group">
         <?= Html::submitButton('<i class="ace-icon fa fa-floppy-o bigger-120 blue"></i> Guardar', ['class' => 'btn btn-white btn-info btn-bold']) ?>
+        <a href="<?= $url ?>" class="btn btn-white btn-default btn-round">
+												<i class="ace-icon fa fa-times red2"></i>
+												Cancelar
+				</a>
     </div>
+
+
 
     <?php ActiveForm::end(); ?>

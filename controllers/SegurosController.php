@@ -58,7 +58,7 @@ class SegurosController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($id)
+    public function actionCreate($id,$url)
     {
         $model = new Seguros();
         $model->codbien=$id;
@@ -67,7 +67,7 @@ class SegurosController extends Controller
             return $this->redirect(['/bienes/view-resumen', 'id' => $model->codbien]);
         } else {
             return $this->render('create', [
-                'model' => $model,
+                'model' => $model,'url'=>$url,
             ]);
         }
     }
@@ -78,15 +78,15 @@ class SegurosController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
+    public function actionUpdate($id,$url)
     {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['/bienes/view-resumen', 'id' => $model->codbien]);
+            return $this->redirect($url);
         } else {
             return $this->render('update', [
-                'model' => $model,
+                'model' => $model,'url'=>$url,
             ]);
         }
     }
@@ -99,9 +99,13 @@ class SegurosController extends Controller
      */
     public function actionDelete($id)
     {
+        $modelTemp=$this->findModel($id);
         $this->findModel($id)->delete();
+        unlink(Yii::app()->basePath.'/documents/'.$modelTemp->filename);
+          return $this->redirect(['/seguros/view','id'=>$modelTemp->codseg0->cod]);
 
-        return $this->redirect(['index']);
+
+
     }
 
     /**

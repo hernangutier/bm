@@ -23,7 +23,7 @@ use Yii;
  * @property string $descripcion_cobertura
  * @property integer $codbien
  * @property boolean $active
- * @property string $titulo
+
  *
  * @property Bienes $codbien0
 * @property SdbSeguros $codaseguradora0
@@ -35,7 +35,7 @@ class Seguros extends \yii\db\ActiveRecord
      * @inheritdoc
      */
 
-     
+
 
     public static function tableName()
     {
@@ -48,7 +48,7 @@ class Seguros extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['f_ini', 'f_fin','codaseguradora','monto','npoliza','titulo'], 'required'],
+            [['f_ini', 'f_fin','codaseguradora','monto','npoliza'], 'required'],
             [['cod', 'codaseguradora', 'moneda', 'tipo_cobertura', 'codbien'], 'integer'],
             [['monto'], 'number'],
             [['tipo'], 'string'],
@@ -58,7 +58,7 @@ class Seguros extends \yii\db\ActiveRecord
             [['npoliza', 'especifique_moneda'], 'string', 'max' => 30],
             [['resp_civil'], 'string', 'max' => 1],
             ['monto', 'validateMonto'],
-            [['titulo'], 'string', 'max' => 200],
+
         ];
     }
 

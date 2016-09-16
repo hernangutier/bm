@@ -4,6 +4,7 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Seguros */
+/* @var $url yii\helpers\Url */
 
 $this->title = Yii::t('app', 'Actualizar {modelClass}: ', [
     'modelClass' => 'Poliza: ',
@@ -17,7 +18,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', $this->title);
 
 
     <?= $this->render('_form', [
-        'model' => $model,
+        'model' => $model,'url'=>$url,
     ]) ?>
 
 </div>

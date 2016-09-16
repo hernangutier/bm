@@ -118,12 +118,12 @@ class BienesController extends Controller
                   }
         }
 
-        public function actionSetSeguro($id){
+        public function actionSetSeguro($id,$url){
           $count=Seguros::findOne(['codbien'=> $id,'active'=>true]);
           if (!(is_null($count))){
-              $this->redirect(['/seguros/update','id'=>$count->cod]);
+              $this->redirect(['/seguros/update','id'=>$count->cod,'url'=>$url,]);
           } else {
-             $this->redirect(['/seguros/create','id'=>$id]);
+             $this->redirect(['/seguros/create','id'=>$id,'url'=>$url,]);
           }
 
         }

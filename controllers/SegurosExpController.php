@@ -9,7 +9,8 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
-
+use yii\helpers\Html;
+use yii\helpers\Url;
 /**
  * SegurosExpController implements the CRUD actions for SegurosExp model.
  */
@@ -68,8 +69,8 @@ class SegurosExpController extends Controller
     if ($model->load(Yii::$app->request->post()) ) {
         $model->file=UploadedFile::getInstance($model,'file');
         $namefile=uniqid('');
-        $model->file->saveAs('documents/'. $namefile );
-        $model->filename= $namefile.'.' . $model->file->extension;
+        $model->file->saveAs('documents/'. $namefile .'.' . $model->file->extension );
+        $model->filename= $namefile .'.' . $model->file->extension;
         if ($model->save()) {
           return $this->redirect(['/seguros/view', 'id' => $model->codseg]);
         }
@@ -79,6 +80,92 @@ class SegurosExpController extends Controller
       ]);
     }
   }
+
+
+  public function actionDownload($id)
+
+       {
+
+            $model=$this->findModel($id);
+
+
+
+             //Si el archivo no se ha podido descargar
+             //downloadFile($dir, $file, $extensions=[])
+             if (!$this->downloadFile("documents/", Html::encode($model->filename), ["pdf", "txt", "doc","jpg","jpeg"]))
+             {
+              //Mensaje flash para mostrar el error
+              Yii::$app->session->setFlash("errordownload");
+             }
+
+
+
+  }
+
+  private function downloadFile($dir, $file, $extensions=[])
+      {
+       //Si el directorio existe
+       if (is_dir($dir))
+       {
+        //Ruta absoluta del archivo
+        $path = $dir.$file;
+
+        //Si el archivo existe
+        if (is_file($path))
+        {
+         //Obtener información del archivo
+         $file_info = pathinfo($path);
+         //Obtener la extensión del archivo
+         $extension = $file_info["extension"];
+
+         if (is_array($extensions))
+         {
+          //Si el argumento $extensions es un array
+          //Comprobar las extensiones permitidas
+          foreach($extensions as $e)
+          {
+           //Si la extension es correcta
+           if ($e === $extension)
+           {
+            //Procedemos a descargar el archivo
+            // Definir headers
+            $size = filesize($path);
+            header("Content-Type: application/force-download");
+            header("Content-Disposition: attachment; filename=$file");
+            header("Content-Transfer-Encoding: binary");
+            header("Content-Length: " . $size);
+            // Descargar archivo
+            readfile($path);
+            //Correcto
+            return true;
+           }
+          }
+         }
+
+        }
+       }
+       //Ha ocurrido un error al descargar el archivo
+       return false;
+      }
+
+
+      public function actionVisor($id,$url){
+        $model=$this->findModel($id);
+
+        if (Yii::$app->request->post()) {
+            if (!$this->downloadFile("documents/", Html::encode($model->filename), ["pdf", "txt", "doc","jpg","jpeg"])) {
+                //Mensaje flash para mostrar el error
+               Yii::$app->session->setFlash("errordownload");
+            }
+        }
+         else {
+            return $this->render('_visor', [
+            'model' => $this->findModel($id),
+            'url'=>$url,
+        ]);
+        }
+      }
+
 
     /**
      * Updates an existing SegurosExp model.
@@ -107,9 +194,12 @@ class SegurosExpController extends Controller
      */
     public function actionDelete($id)
     {
+        $modelTemp=$this->findModel($id);
         $this->findModel($id)->delete();
+        unlink(Yii::$app->basePath.'/web/documents/'.$modelTemp->filename);
+        return $this->redirect(['/seguros/view','id'=>$modelTemp->codseg0->cod]);
 
-        return $this->redirect(['index']);
+
     }
 
     /**
