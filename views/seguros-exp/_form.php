@@ -15,6 +15,7 @@ use yii\widgets\Pjax;
 use yii\helpers\Url;
 use kartik\widgets\SwitchInput;
 
+
 /* @var $this yii\web\View */
 /* @var $model app\models\SegurosExp */
 /* @var $form yii\widgets\ActiveForm */
@@ -25,6 +26,9 @@ use kartik\widgets\SwitchInput;
 
 
       <?php $form = ActiveForm::begin(['options'=>['enctype'=>'multipart/form-data']]); ?>
+
+      <?= $form->field($model, 'titulo')->textInput(['maxlength' => true]) ?>
+
       <?php
       echo $form->field($model, 'file')->widget(FileInput::classname(), [
               'options' => ['accept' => 'image/*'],

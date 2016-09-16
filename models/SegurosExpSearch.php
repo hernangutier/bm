@@ -19,7 +19,7 @@ class SegurosExpSearch extends SegurosExp
     {
         return [
             [['cod', 'codseg'], 'integer'],
-            [['file'], 'safe'],
+            [['filename'], 'safe'],
         ];
     }
 
@@ -60,7 +60,7 @@ class SegurosExpSearch extends SegurosExp
             'codseg' => $this->codseg,
         ]);
 
-        $query->andFilterWhere(['like', 'file', $this->file]);
+        $query->andFilterWhere(['like', 'filename', $this->filename]);
 
         return $dataProvider;
     }

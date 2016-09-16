@@ -8,6 +8,7 @@ use app\models\SegurosExpSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * SegurosExpController implements the CRUD actions for SegurosExp model.
@@ -60,17 +61,24 @@ class SegurosExpController extends Controller
      */
     public function actionCreate($id)
     {
-        $model = new SegurosExp();
-        $model->codseg=$id;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['/Seguros/view', 'id' => $model->codseg]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+      $model = new SegurosExp();
+      $model->codseg=$id;
+
+    if ($model->load(Yii::$app->request->post()) ) {
+        $model->file=UploadedFile::getInstance($model,'file');
+        $namefile=uniqid('');
+        $model->file->saveAs('documents/'. $namefile );
+        $model->filename= $namefile.'.' . $model->file->extension;
+        if ($model->save()) {
+          return $this->redirect(['/seguros/view', 'id' => $model->codseg]);
         }
+    } else {
+      return $this->render('create', [
+          'model' => $model,
+      ]);
     }
+  }
 
     /**
      * Updates an existing SegurosExp model.

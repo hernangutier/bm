@@ -9,7 +9,8 @@ use Yii;
  *
  * @property integer $cod
  * @property integer $codseg
- * @property string $file
+ * @property string $filename
+ * @property string $titulo
  *
  * @property Seguros $codseg0
  */
@@ -18,6 +19,8 @@ class SegurosExp extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+
+    public $file;
     public static function tableName()
     {
         return 'seguros_exp';
@@ -29,9 +32,10 @@ class SegurosExp extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['codseg', 'file'], 'required'],
+            [['codseg', 'filename','titulo'], 'required'],
             [['codseg'], 'integer'],
-            [['file'], 'string', 'max' => 100]
+            [['filename'], 'string', 'max' => 100],
+            [['file'],'file'],
         ];
     }
 
@@ -43,7 +47,8 @@ class SegurosExp extends \yii\db\ActiveRecord
         return [
             'cod' => 'Cod',
             'codseg' => 'Codseg',
-            'file' => 'File',
+            'filename' => 'Archivo Adjunto',
+            'titulo' => 'Titulo o Descripción',
         ];
     }
 
