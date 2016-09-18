@@ -33,6 +33,7 @@ class SegurosController extends Controller
     public function actionIndex()
     {
         $searchModel = new SegurosSearch();
+        $searchModel->status=0;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -100,13 +101,34 @@ class SegurosController extends Controller
     public function actionDelete($id)
     {
         $modelTemp=$this->findModel($id);
+
+
         $this->findModel($id)->delete();
-        unlink(Yii::app()->basePath.'/documents/'.$modelTemp->filename);
-          return $this->redirect(['/seguros/view','id'=>$modelTemp->codseg0->cod]);
+
+        //----------------- Bucle para Eliminar los Archivos del Sevidor ------
+        //unlink(Yii::app()->basePath.'/documents/'.$modelTemp->filename);
+        //---------------------------------------------------------------------
+          return $this->redirect(['index']);
 
 
 
     }
+
+    public function actionAnular($id)
+        {
+    $model = $this->findModel($id);
+    $model->scenario=Seguros::SCENARIO_ANULAR;
+    $model->status=2;
+    if ($model->load(Yii::$app->request->post())) {
+        if ($model->save()) {
+            return $this->redirect(['view','id'=>$model->cod]);
+        }
+    }
+
+    return $this->render('anular', [
+        'model' => $model,
+    ]);
+      }
 
     /**
      * Finds the Seguros model based on its primary key value.

@@ -22,8 +22,8 @@ use Yii;
  * @property string $especifique_tipo_cobertura
  * @property string $descripcion_cobertura
  * @property integer $codbien
- * @property boolean $active
-
+ * @property integer $status
+* @property string $observaciones
  *
  * @property Bienes $codbien0
 * @property SdbSeguros $codaseguradora0
@@ -34,7 +34,7 @@ class Seguros extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-
+     const SCENARIO_ANULAR = 'anular';
 
 
     public static function tableName()
@@ -49,19 +49,43 @@ class Seguros extends \yii\db\ActiveRecord
     {
         return [
             [['f_ini', 'f_fin','codaseguradora','monto','npoliza'], 'required'],
-            [['cod', 'codaseguradora', 'moneda', 'tipo_cobertura', 'codbien'], 'integer'],
+            [['cod','status', 'codaseguradora', 'moneda', 'tipo_cobertura', 'codbien'], 'integer'],
             [['monto'], 'number'],
             [['tipo'], 'string'],
 
-            [['active'], 'boolean'],
+
             [['otra_aseguradora', 'especifique_tipo_cobertura', 'descripcion_cobertura'], 'string', 'max' => 100],
             [['npoliza', 'especifique_moneda'], 'string', 'max' => 30],
             [['resp_civil'], 'string', 'max' => 1],
             ['monto', 'validateMonto'],
+            [['observaciones'], 'string', 'max' => 400],
+            [['observaciones'], 'required', 'on'=> self::SCENARIO_ANULAR]
 
         ];
     }
 
+    public function scenarios()
+    {
+        $scenarios = parent::scenarios();
+
+        $scenarios[self::SCENARIO_ANULAR] = ['observaciones'];
+
+        return $scenarios;
+    }
+
+
+    public function getStatusHtml(){
+      if ($this->status==0){
+        return '<span class="label label-success arrowed-in arrowed-in-right">Vigente</span>';
+      }
+      if ($this->status==1){
+        return '<span class="label label-warning arrowed">Vencida</span>';
+      }
+      if ($this->status==2){
+        return '<span class="label label-danger arrowed">Anulada</span>';
+      }
+
+    }
 
     public function getVigenciaHtml(){
 
@@ -106,7 +130,8 @@ class Seguros extends \yii\db\ActiveRecord
             'especifique_tipo_cobertura' => 'Especifique Tipo Cobertura',
             'descripcion_cobertura' => 'Descripcion Cobertura',
             'codbien' => 'Codbien',
-            'active' => 'Active',
+            'status' => 'Estado de la Poliza',
+            'observaciones' => 'Observaciones',
         ];
     }
 

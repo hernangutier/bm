@@ -64,11 +64,15 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
 
             [
-            'attribute'=>'npoliza',
-            'label'=>'Estado de Vigencia',
+            'attribute'=>'status',
+            'label'=>'Estado de la Poliza',
+            'filter' =>['0'=>'Vigentes',
+                        '1'=>'Vencidas',
+                        '2'=>'Anuladas',
+                       ],
 
             'value'=>function ($searchModel, $key, $index, $widget) {
-                return $searchModel->getVigenciaHtml();
+                return $searchModel->getStatusHtml();
             },
 
             'format'=>'raw'

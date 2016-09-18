@@ -38,16 +38,57 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
                           </ul>
-  </div>
+
       <a href="<?= Url::to(['/seguros/update','id'=>$model->cod,'url'=>Url::current()]) ?>" class="btn btn-primary">
                               <i class="ace-icon fa fa-pencil-square-o align-top bigger-125"></i>
                               Actualizar
       </a>
+      <?php
+          if ($model->status==0){
+              echo '<a href="' . Url::to(['/seguros/anular','id'=>$model->cod]) . '" class="btn btn-danger">
+                                      <i class="ace-icon fa fa-pencil-square-o align-top bigger-125"></i>
+                                      Anular
+             </a>';
+          }
+       ?>
+
+    </div>
   </div>
 
 
 
 
+
+  <h4 class="blue">
+         <span class="label label-success arrowed-in-right">
+            <i class="ace-icon fa fa-cog smaller-80 align-middle"></i>
+                  Bien Asgurado
+         </span>
+  </h4>
+
+
+  <div class="profile-user-info profile-user-info-striped">
+                    <div class="profile-info-row">
+                      <div class="profile-info-name">N° de Bien </div>
+
+                      <div class="profile-info-value">
+                        <span class="editable" id="username"><h4 class="text-primary">   <?= $model->codbien0->codigo ?></h4></span>
+                      </div>
+                    </div>
+
+                    <div class="profile-info-row">
+                      <div class="profile-info-name"> Descripcion del Bien </div>
+
+                      <div class="profile-info-value">
+                          <span class="editable" id="username"><?= $model->codbien0->descripcion ?></span>
+                      </div>
+                    </div>
+
+
+
+
+
+  </div>
 
   <h4 class="blue">
          <span class="label label-success arrowed-in-right">
@@ -61,7 +102,7 @@ $this->params['breadcrumbs'][] = $this->title;
                       <div class="profile-info-name">N° de Poliza </div>
 
                       <div class="profile-info-value">
-                        <span class="editable" id="username"><code>   <?= $model->npoliza ?></code></span>
+                        <span class="editable" id="username"><h4 class="text-primary">   <?= $model->npoliza ?></h4></span>
                       </div>
                     </div>
 
@@ -102,6 +143,7 @@ $this->params['breadcrumbs'][] = $this->title;
                   Detalles de la Poliza
          </span>
   </h4>
+<div class="profile-user-info profile-user-info-striped">
   <div class="profile-info-row">
     <div class="profile-info-name"> Inicio de Vigencia </div>
 
@@ -154,9 +196,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="profile-info-name"> Estatus de la Poliza </div>
 
     <div class="profile-info-value">
-        <span class="editable" id="username"><?= $model->getVigenciaHtml() ?></span>
+        <span class="editable" id="username"><?= $model->getStatusHtml() ?></span>
     </div>
   </div>
+</div>
 
   <div class="hr hr32 hr-dotted"></div>
 

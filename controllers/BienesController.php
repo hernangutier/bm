@@ -171,6 +171,7 @@ class BienesController extends Controller
         $model->scenario=Bienes::SCENARIO_MIGRACION;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
             return $this->redirect($url);
         } else {
             return $this->render('edith_migracion', [
@@ -186,6 +187,27 @@ class BienesController extends Controller
      * @param integer $id
      * @return mixed
      */
+
+    public function geenerateTXT(){
+      $archivo = fopen('documents/archivo.txt','a');
+      $rows = Bienes::find()->all();
+      fputs($archivo,"N° de Bien");
+      fputs($archivo," | ");
+      fputs($archivo,"Descripcion");
+      fputs($archivo,"\n");
+      foreach($rows as $row)
+          {
+                fputs($archivo,$row->codigo);
+                fputs($archivo," | ");
+                fputs($archivo,$row->descripcion);
+                fputs($archivo,"\n");
+
+          }
+
+
+        fclose($archivo);
+    }
+
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
