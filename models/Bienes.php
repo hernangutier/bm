@@ -254,6 +254,16 @@ class Bienes extends \yii\db\ActiveRecord
         return Yii::$app->db->createCommand($sql)->queryAll();
     }
 
+    public static function getListSqlActivesNoAsegurados(){
+      $sql="SELECT  * from vw_bienes_no_asegurados";
+        return Yii::$app->db->createCommand($sql)->queryAll();
+    }
+
+    public static function getListSqlAsegurables(){
+      $sql="SELECT  * from vw_bienes_asegurables";
+        return Yii::$app->db->createCommand($sql)->queryAll();
+    }
+
     public function getTipoBien(){
       if ($this->tipobien==0){
         return 'Bien Mueble';

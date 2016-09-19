@@ -156,7 +156,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="profile-info-name"> Vencimiento </div>
 
     <div class="profile-info-value">
-        <span class="editable" id="username"><?= $model->f_ini ?></span>
+        <span class="editable" id="username"><?= $model->f_fin ?></span>
     </div>
   </div>
 

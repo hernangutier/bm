@@ -92,6 +92,17 @@ class SegurosController extends Controller
         }
     }
 
+    public function actionRegister($url){
+      $model=new Seguros();
+      if ($model->load(Yii::$app->request->post()) && $model->save()) {
+          return $this->redirect($url);
+      } else {
+          return $this->render('register', [
+              'model' => $model,'url'=>$url,
+          ]);
+      }
+    }
+
     /**
      * Deletes an existing Seguros model.
      * If deletion is successful, the browser will be redirected to the 'index' page.

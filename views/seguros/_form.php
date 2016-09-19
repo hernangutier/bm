@@ -17,6 +17,44 @@ use  yii\helpers\Url;
 
     <?php $form = ActiveForm::begin(); ?>
 
+
+                                    <div id="bienes">
+
+
+
+
+                                    <h4 class="blue">
+                                             <span class="label label-primary arrowed-in-right">
+                                                <i class="ace-icon fa fa-cog smaller-80 align-middle"></i>
+                                                      Datos del Bien
+                                             </span>
+                                      </h4>
+
+                                    <div class="profile-user-info profile-user-info-striped">
+                                                        <div class="profile-info-row">
+                                                          <div class="profile-info-name">Código </div>
+
+                                                          <div class="profile-info-value">
+                                                            <span class="editable" id="codigo"><h4 class="text-primary">    <?= $model->codbien0->codigo ?></h4></span>
+                                                          </div>
+                                                        </div>
+
+                                                        <div class="profile-info-row">
+                                                          <div class="profile-info-name"> Descripción </div>
+
+                                                          <div class="profile-info-value">
+                                                            <span class="editable" id="descripcion"><?= $model->codbien0->descripcion ?></span>
+                                                          </div>
+                                                        </div>
+
+
+
+
+                                      </div>
+                                  </div>
+                                  <br>
+
+
     <div class="tabbable">
                       <ul class="nav nav-tabs" id="myTab">
                         <li class="active">

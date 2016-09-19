@@ -48,7 +48,7 @@ class Seguros extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['f_ini', 'f_fin','codaseguradora','monto','npoliza'], 'required'],
+            [['f_ini', 'f_fin','codaseguradora','monto','npoliza','codbien'], 'required'],
             [['cod','status', 'codaseguradora', 'moneda', 'tipo_cobertura', 'codbien'], 'integer'],
             [['monto'], 'number'],
             [['tipo'], 'string'],
@@ -129,7 +129,7 @@ class Seguros extends \yii\db\ActiveRecord
             'tipo_cobertura' => 'Tipo Cobertura',
             'especifique_tipo_cobertura' => 'Especifique Tipo Cobertura',
             'descripcion_cobertura' => 'Descripcion Cobertura',
-            'codbien' => 'Codbien',
+            'codbien' => 'Bien Mueble a Asegurar',
             'status' => 'Estado de la Poliza',
             'observaciones' => 'Observaciones',
         ];

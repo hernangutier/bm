@@ -21,6 +21,8 @@ class SegurosSearch extends Seguros
             [['cod', 'codaseguradora','status', 'moneda', 'tipo_cobertura', 'codbien'], 'integer'],
             [['otra_aseguradora', 'npoliza', 'tipo', 'especifique_moneda', 'f_ini', 'f_fin', 'resp_civil', 'especifique_tipo_cobertura', 'descripcion_cobertura', 'observaciones'], 'safe'],
             [['monto'], 'number'],
+            [['monto'], 'number'],
+           [['active'], 'boolean'],
 
 
         ];
@@ -68,16 +70,18 @@ class SegurosSearch extends Seguros
             'tipo_cobertura' => $this->tipo_cobertura,
             'codbien' => $this->codbien,
             'status' => $this->status,
+             'active' => $this->active,
         ]);
 
         $query->andFilterWhere(['like', 'otra_aseguradora', $this->otra_aseguradora])
-            ->andFilterWhere(['like', 'npoliza', $this->npoliza])
-            ->andFilterWhere(['like', 'tipo', $this->tipo])
-            ->andFilterWhere(['like', 'especifique_moneda', $this->especifique_moneda])
-            ->andFilterWhere(['like', 'resp_civil', $this->resp_civil])
-            ->andFilterWhere(['like', 'especifique_tipo_cobertura', $this->especifique_tipo_cobertura])
-            ->andFilterWhere(['like', 'descripcion_cobertura', $this->descripcion_cobertura])
-            ->andFilterWhere(['like', 'observaciones', $this->observaciones]);
+             ->andFilterWhere(['like', 'npoliza', $this->npoliza])
+             ->andFilterWhere(['like', 'tipo', $this->tipo])
+             ->andFilterWhere(['like', 'especifique_moneda', $this->especifique_moneda])
+             ->andFilterWhere(['like', 'resp_civil', $this->resp_civil])
+             ->andFilterWhere(['like', 'especifique_tipo_cobertura', $this->especifique_tipo_cobertura])
+             ->andFilterWhere(['like', 'descripcion_cobertura', $this->descripcion_cobertura])
+             ->andFilterWhere(['like', 'observaciones', $this->observaciones]);
+
 
         return $dataProvider;
     }

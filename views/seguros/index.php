@@ -24,7 +24,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Registrar Poliza'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Registrar Poliza'), ['register','url'=>Url::current()], ['class' => 'btn btn-success']) ?>
+        <a href="#" class="btn btn-default">
+                                      <i class="ace-icon fa fa-print align-top bigger-125"></i>
+                                      Imprimir Polizas Activas
+        </a>
     </p>
 
     <?= GridView::widget([
@@ -57,8 +61,8 @@ $this->params['breadcrumbs'][] = $this->title;
 											 '</a>';
             },
             'filter' => Html::activeDropDownList($searchModel,
-            'codbien', ArrayHelper::map(app\models\Bienes::find(['is_asegurable'=>true])->andFilterWhere(['=', 'is_asegurable', true])->all(),
-            'cod', 'descripcion'),['class'=>'form-control','prompt' => 'No Filtro']),
+            'codbien', ArrayHelper::map(app\models\Bienes::getListSqlAsegurables(),
+            'cod', 'resultado'),['class'=>'form-control','prompt' => 'No Filtro']),
 
             'format'=>'raw'
             ],
@@ -107,7 +111,28 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'codbien',
             // 'active:boolean',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn',
+                'template' => '{update}',
+
+                 //--------- Actualizar ---
+             'buttons' => [
+
+
+
+
+               'update' => function ($url,$searchModel) {
+                 return Html::a( '<i class="ace-icon fa fa-pencil bigger-120"></i>',
+                            ['seguros/update','id'=>$searchModel->cod,'url'=> Url::current()],
+
+                            ['title'=>'Actualizar Poliza',
+                            'class'=>'blue',
+                           ]);
+               },
+
+
+
+             ],
+            ],
         ],
     ]); ?>
 
