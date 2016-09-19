@@ -25,9 +25,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a(Yii::t('app', 'Registrar Poliza'), ['register','url'=>Url::current()], ['class' => 'btn btn-success']) ?>
-        <a href="#" class="btn btn-default">
-                                      <i class="ace-icon fa fa-print align-top bigger-125"></i>
-                                      Imprimir Polizas Activas
+        <a href="<?= Url::base() . '/report/polizas_activas.php' ?>" class="btn btn-default">
+                               <i class="ace-icon fa fa-print align-top bigger-125"></i>
+                               Imprimir Polizas Activas
         </a>
     </p>
 

@@ -59,10 +59,20 @@ class Seguros extends \yii\db\ActiveRecord
             [['resp_civil'], 'string', 'max' => 1],
             ['monto', 'validateMonto'],
             [['observaciones'], 'string', 'max' => 400],
-            [['observaciones'], 'required', 'on'=> self::SCENARIO_ANULAR]
+            [['observaciones'], 'required', 'on'=> self::SCENARIO_ANULAR],
+            ['f_fin', 'validateFechas'],
 
         ];
     }
+
+
+    public function validateFechas(){
+      if ($this->f_ini>=$this->f_fin){
+        return $this->addError('f_fin','La Fecha de Vencimiento invalida...');
+      }
+    }
+
+    
 
     public function scenarios()
     {

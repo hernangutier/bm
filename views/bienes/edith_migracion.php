@@ -46,6 +46,26 @@ $this->params['breadcrumbs'][] = $this->title;
 
    ?>
 
+   <?php //-------------- Contactos -------------
+
+     echo $form->field($model, 'codcolor')->widget(Select2::classname(), [
+
+          'data' => ArrayHelper::map(app\models\SdbColores::find()->all(),'cod',
+               function($model, $defaultValue) {
+                  return $model->codigo. '-'. $model->descripcion;
+          }
+  ),
+          'language' => 'es',
+
+          'options' => ['placeholder' => 'Seleccione el Color ...'],
+          'pluginOptions' => [
+          'allowClear' => true
+          ],
+
+          ]);
+
+  ?>
+
    <?= $form->field($model, 'estado_uso')->dropDownList(
                    [
                     '1'=>'1 En Uso',

@@ -20,6 +20,7 @@ use Yii;
  * @property integer $isvehicle
  * @property integer $codvehicle
  * @property string $foto
+* @property integer $codcolor
  * @property integer $cod_und_actual
  * @property integer $isasigned
  * @property string $descripcion
@@ -57,6 +58,7 @@ use Yii;
  * @property DesincorporacionesDt[] $desincorporacionesDts
  * @property MovimientosDt[] $movimientosDts
  * @property PeriodosDt[] $periodosDts
+ * @property SdbColores $codcolor0
  */
 class Bienes extends \yii\db\ActiveRecord
 {
@@ -77,7 +79,7 @@ class Bienes extends \yii\db\ActiveRecord
     {
         return [
             [['cod', 'codigo', 'status', 'costo', 'notasigned', 'isvehicle', 'isasigned', 'tipobien', 'pendientedesinc', 'aplicaiva', 'existe', 'disponibilidad'], 'required'],
-            [['cod', 'cod_ing', 'dias_garantia', 'codresp_directo', 'status', 'notasigned', 'isvehicle', 'codvehicle', 'cod_und_actual', 'isasigned', 'codclas', 'coduser', 'operativo', 'tipobien', 'codlin', 'pendientedesinc', 'aplicaiva', 'existe', 'codcat', 'statusfisical', 'disponibilidad', 'mantenimiento', 'estado_uso', 'estado_fisico', 'activo'], 'integer'],
+            [['cod', 'cod_ing', 'dias_garantia', 'codresp_directo', 'status', 'notasigned', 'isvehicle', 'codvehicle', 'cod_und_actual', 'isasigned', 'codclas', 'coduser', 'operativo', 'tipobien', 'codlin', 'pendientedesinc', 'aplicaiva', 'existe', 'codcat', 'statusfisical', 'disponibilidad', 'mantenimiento', 'estado_uso', 'estado_fisico', 'activo','codcolor'], 'integer'],
             [['costo'], 'number'],
             [['foto', 'descripcion', 'foto1'], 'string'],
             [['fcreacion', 'fdesinc'], 'safe'],
@@ -139,14 +141,14 @@ class Bienes extends \yii\db\ActiveRecord
             'motivo_indisponibilidad' => 'Motivo Indisponibilidad',
             'is_in' => 'Is In',
             'is_asegurable' => 'Es Asegurable',
-
+            'codcolor'=>'Color',
         ];
     }
 
     public function scenarios()
     {
         $scenarios = parent::scenarios();
-        $scenarios[self::SCENARIO_MIGRACION] = ['codcat','estado_fisico', 'estado_uso','is_colectivo','is_asegurable'];
+        $scenarios[self::SCENARIO_MIGRACION] = ['codcolor','codcat','estado_fisico', 'estado_uso','is_colectivo','is_asegurable'];
 
 
         return $scenarios;
@@ -207,6 +209,15 @@ class Bienes extends \yii\db\ActiveRecord
     public function getMovimientosDts()
     {
         return $this->hasMany(MovimientosDt::className(), ['codbien' => 'cod']);
+    }
+
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCodcolor0()
+    {
+        return $this->hasOne(SdbColores::className(), ['cod' => 'codcolor']);
     }
 
 

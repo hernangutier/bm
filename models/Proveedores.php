@@ -3,7 +3,7 @@
 namespace app\models;
 
 use Yii;
-
+use app\models\Proveedores;
 /**
  * This is the model class for table "{{%proveedores}}".
  *
@@ -62,6 +62,57 @@ class Proveedores extends \yii\db\ActiveRecord
 
         ];
     }
+
+    public static function getSubString($string, $length=NULL)
+{
+    //Si no se especifica la longitud por defecto es 50
+    if ($length == NULL)
+        $length = 50;
+    //Primero eliminamos las etiquetas html y luego cortamos el string
+    $stringDisplay = substr(strip_tags($string), 0, $length);
+    //Si el texto es mayor que la longitud se agrega puntos suspensivos
+    if (strlen(strip_tags($string)) > $length)
+        $stringDisplay .= ' ...';
+    return $stringDisplay;
+}
+
+
+  public static function generateTxt(){
+      //----- Abrimos y Creamos el Archivo
+      $archivo = fopen('documents/proveedores.txt','a');
+      //------- Creamos el Encabezado --------
+      fputs($archivo,"Código del Proveedor");
+      fputs($archivo," ; ");
+      fputs($archivo,"Descripcion del Proveedor");
+      fputs($archivo," ; ");
+      fputs($archivo,"tipo_de_proveedor");
+      fputs($archivo," ; ");
+      fputs($archivo,"rif");
+      fputs($archivo," ; ");
+      fputs($archivo,"otra_descripcion");
+      fputs($archivo,"\n");
+      //----------- --------------------------
+      $rows=Proveedores::find()->all();
+      foreach($rows as $row)
+          {
+                fputs($archivo,$row->codigo);
+                fputs($archivo," ; ");
+                fputs($archivo,Proveedores::getSubString($row->razon,100));
+                fputs($archivo," ; ");
+                fputs($archivo,$row->tipo);
+                fputs($archivo," ; ");
+                fputs($archivo,$row->cedrif);
+                fputs($archivo," ; ");
+                fputs($archivo,'XXX');
+                fputs($archivo,"\n");
+
+
+
+          }
+      fclose($archivo);
+
+
+  }
 
     /**
      * @inheritdoc

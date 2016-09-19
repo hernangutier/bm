@@ -18,7 +18,7 @@ class BienesSearch extends Bienes
     public function rules()
     {
         return [
-            [['cod', 'cod_ing', 'dias_garantia', 'codresp_directo', 'status', 'notasigned', 'isvehicle', 'codvehicle', 'cod_und_actual', 'isasigned', 'codclas', 'coduser', 'operativo', 'tipobien', 'codlin', 'pendientedesinc', 'aplicaiva', 'existe', 'codcat', 'statusfisical', 'disponibilidad', 'mantenimiento', 'estado_uso', 'estado_fisico', 'activo'], 'integer'],
+            [['cod', 'cod_ing', 'dias_garantia', 'codresp_directo', 'status', 'notasigned', 'isvehicle', 'codvehicle', 'cod_und_actual', 'isasigned', 'codclas', 'coduser', 'operativo', 'tipobien', 'codlin', 'pendientedesinc', 'aplicaiva', 'existe', 'codcat', 'statusfisical', 'disponibilidad', 'mantenimiento', 'estado_uso', 'estado_fisico', 'activo','codcolor'], 'integer'],
             [['codigo', 'serial', 'observacion', 'foto', 'descripcion', 'marca', 'fcreacion', 'localizacion', 'fdesinc', 'undmedida', 'foto1', 'old_cod', 'motivo_indisponibilidad'], 'safe'],
             [['costo'], 'number'],
             [['is_colectivo', 'is_in'], 'boolean'],
