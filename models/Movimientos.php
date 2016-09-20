@@ -204,7 +204,7 @@ class Movimientos extends \yii\db\ActiveRecord
     }
 
     public function validateExistBienesAsignar(){
-      if (Bienes::find(['cod_und_actual'=>$this->codund_origen])->andFilterWhere(['=', 'estado_uso', ['6','10']])->count()<=0) {
+      if (Bienes::find()->andFilterWhere(['=', 'cod_und_actual', $this->codund_origen])->andFilterWhere(['=', 'estado_uso', ['6','10']])->count()<=0) {
           return $this->addError('codund_origen','No Existen Bienes en esta Unidad de Origen...');
       }
     }

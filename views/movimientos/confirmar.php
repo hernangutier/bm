@@ -53,22 +53,52 @@ $(document).ready(function() {
 
 
   <div class="widget-box">
-  									<div class="widget-header widget-header-blue widget-header-flat">
-  										<h4 class="widget-title lighter">Movimiento de Bienes</h4>
+                    <div class="widget-header widget-header-blue widget-header-flat">
+                      <h4 class="widget-title lighter">Movimiento de Bienes</h4>
 
-  										<div class="widget-toolbar">
+                      <div class="widget-toolbar">
 
                         <label>
-  												<small class="green">
-  													<b>Periodo</b>
-  												</small>
+                          <small class="green">
+                            <b>Periodo</b>
+                          </small>
 
-  												<h4>2016-I</h4>
-  												<span class="lbl middle"></span>
-  											</label>
-  										</div>
+                          <h5><?= app\models\Periodos::getActive()->descripcion ?></h5>
+                          <span class="lbl middle"></span>
+                        </label>
+                      </div>
 
+                      <?php
+                        if (!(is_null($model->coduser_origen))){
+                          echo
+                          '<div class="widget-toolbar">
+                          <label>
+                            <small class="green">
+                              <b>Usuario a Desvincular Bienes</b>
+                            </small>
 
+                            <h5>' . $model->coduserOrigen->getNombreCompleto() . '</h5>
+                            <span class="lbl middle"></span>
+                              </label>
+                            </div>';
+                        }
+                        ?>
+
+                    <?php
+                      if (!(is_null($model->coduser_destino))){
+                        echo
+                        '<div class="widget-toolbar">
+                        <label>
+                          <small class="green">
+                            <b>Usuario a Asignar los Bienes</b>
+                          </small>
+
+                          <h5>' . $model->coduserDestino->getNombreCompleto() . '</h5>
+                          <span class="lbl middle"></span>
+                            </label>
+                          </div>';
+                      }
+                      ?>
 
                       <div class="widget-toolbar">
                       <label>
@@ -76,12 +106,21 @@ $(document).ready(function() {
                           <b>Tipo de Movimiento</b>
                         </small>
 
-                        <h4>Asignacion</h4>
+                        <h5><?php echo $model->getTipo() ?></h5>
                         <span class="lbl middle"></span>
                       </label>
                       </div>
 
+                      <div class="widget-toolbar">
+                      <label>
+                        <small class="green">
+                          <b>Destino del Inventario</b>
+                        </small>
 
+                        <h5><?php echo $model->codundDestino->descripcion ?></h5>
+                        <span class="lbl middle"></span>
+                      </label>
+                      </div>
 
                       <div class="widget-toolbar">
                       <label>
@@ -89,10 +128,12 @@ $(document).ready(function() {
                           <b>Origen del Inventario</b>
                         </small>
 
-                        <h4><?php echo $model->codundOrigen->descripcion ?></h4>
+                        <h5><?php echo $model->codundOrigen->descripcion ?></h5>
                         <span class="lbl middle"></span>
                       </label>
                       </div>
+
+
 
                       <div class="widget-toolbar">
                       <label>
@@ -100,41 +141,41 @@ $(document).ready(function() {
                           <b>N° de Control</b>
                         </small>
 
-                        <h4><?= $model->ncontrol  ?></h4>
+                        <h5><?= $model->ncontrol  ?></h5>
                         <span class="lbl middle"></span>
                       </label>
                       </div>
 
-  									</div>
+                    </div>
 
-  									<div class="widget-body">
-  										<div class="widget-main">
-  											<div id="fuelux-wizard-container">
-  												<div>
-  													<ul class="steps">
-  														<li data-step="1" class="complete" >
-  															<span class="step">1</span>
-  															<span class="title">Origenes y Usuarios</span>
-  														</li>
+                    <div class="widget-body">
+                      <div class="widget-main">
+                        <div id="fuelux-wizard-container">
+                          <div>
+                            <ul class="steps">
+                              <li data-step="1" class="complete" >
+                                <span class="step">1</span>
+                                <span class="title">Origenes y Usuarios</span>
+                              </li>
 
-  														<li data-step="2" class="complete">
-  															<span class="step">2</span>
-  															<span class="title">Cargar los Bienes</span>
-  														</li>
+                              <li data-step="2" class="active">
+                                <span class="step">2</span>
+                                <span class="title">Cargar los Bienes</span>
+                              </li>
 
-  														<li data-step="3" class="active">
-  															<span class="step">3</span>
-  															<span class="title">Confirmar</span>
-  														</li>
+                              <li data-step="3">
+                                <span class="step">3</span>
+                                <span class="title">Confirmar</span>
+                              </li>
 
 
-  													</ul>
-  												</div>
+                            </ul>
+                          </div>
 
-  												<hr>
+                          <hr>
 
-  												<div class="step-content pos-rel">
-  													<div class="step-pane active" data-step="2">
+                          <div class="step-content pos-rel">
+                            <div class="step-pane active" data-step="2">
 
                                 <?php $form = ActiveForm::begin(); ?>
                               <div class="container">

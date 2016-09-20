@@ -47,6 +47,7 @@ use Yii;
  * @property string $old_cod
  * @property integer $activo
  * @property boolean $is_colectivo
+ * @property boolean $pend_in_mov
  * @property string $motivo_indisponibilidad
  * @property boolean $is_in
  * @property boolean $is_asegurable
@@ -83,7 +84,7 @@ class Bienes extends \yii\db\ActiveRecord
             [['costo'], 'number'],
             [['foto', 'descripcion', 'foto1'], 'string'],
             [['fcreacion', 'fdesinc'], 'safe'],
-            [['is_colectivo', 'is_in', 'is_asegurable'], 'boolean'],
+            [['is_colectivo', 'is_in', 'is_asegurable','pend_in_mov'], 'boolean'],
             [['codigo', 'serial'], 'string', 'max' => 50],
             [['codigo', 'serial'], 'string', 'max' => 50],
             [['observacion', 'localizacion', 'motivo_indisponibilidad'], 'string', 'max' => 400],
@@ -142,6 +143,7 @@ class Bienes extends \yii\db\ActiveRecord
             'is_in' => 'Is In',
             'is_asegurable' => 'Es Asegurable',
             'codcolor'=>'Color',
+            'pend_in_mov'=>'Pendiente en Movimiento',
         ];
     }
 
