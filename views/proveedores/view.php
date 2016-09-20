@@ -45,11 +45,16 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
   												</ul>
-  </div>
+
       <a href="<?= Url::to(['/proveedores/update','id'=>$model->cod]) ?>" class="btn btn-primary">
       												<i class="ace-icon fa fa-pencil-square-o align-top bigger-125"></i>
       												Actualizar
       </a>
+      <a href="http://rncenlinea.snc.gob.ve/reportes/resultado_busqueda?p=1&rif=<?= str_replace(("-"),"",$model->cedrif) ?>&search=RIF" class="btn btn-info">
+      												<i class="ace-icon fa fa-pencil-square-o align-top bigger-125"></i>
+      												Verificar RNC
+      </a>
+      </div>
   </div>
 
 

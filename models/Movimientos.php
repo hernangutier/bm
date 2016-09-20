@@ -21,6 +21,9 @@ use app\models\Bienes;
  * @property integer $status
  * @property integer $periodo
  * @property integer $estado_uso
+ * @property integer $ano
+ * @property string $fecha_process
+ *
  * @property Periodos $periodo0
  * @property Responsables $coduserOrigen
  * @property Responsables $coduserDestino
@@ -52,10 +55,9 @@ class Movimientos extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['fecha'], 'safe'],
-            [['codund_origen', 'codund_destino', 'coduser_origen', 'coduser_destino', 'coduser', 'tipo','status','estado_uso'], 'integer'],
+            [['fecha', 'fecha_process'], 'safe'],
+            [['codund_origen', 'codund_destino', 'coduser_origen', 'coduser_destino', 'coduser', 'tipo', 'status', 'periodo', 'estado_uso', 'ano'], 'integer'],
             [['observaciones'], 'string'],
-
             [['ncontrol'], 'string', 'max' => 100],
             [['codund_origen','coduser_destino'], 'required', 'on'=> self::SCENARIO_ASIGNAR],
             [['codund_origen','codund_destino'], 'required', 'on'=> self::SCENARIO_TRASLADAR_UND],
@@ -90,6 +92,7 @@ class Movimientos extends \yii\db\ActiveRecord
             'ncontrol' => 'Ncontrol',
             'tipo' => 'Tipo',
             'estado_uso' => 'Estado de Uso a Quedar los Bienes...',
+
         ];
     }
 

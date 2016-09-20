@@ -80,30 +80,42 @@ class Proveedores extends \yii\db\ActiveRecord
   public static function generateTxt(){
       //----- Abrimos y Creamos el Archivo
       $archivo = fopen('documents/proveedores.txt','a');
-      //------- Creamos el Encabezado --------
-      fputs($archivo,"Código del Proveedor");
+      //------- Creamos el Encabepado --------
+      fputs($archivo,"codigo_del_proveedor");
       fputs($archivo," ; ");
-      fputs($archivo,"Descripcion del Proveedor");
+      fputs($archivo,"descripcion_del_proveedor");
       fputs($archivo," ; ");
       fputs($archivo,"tipo_de_proveedor");
       fputs($archivo," ; ");
       fputs($archivo,"rif");
       fputs($archivo," ; ");
       fputs($archivo,"otra_descripcion");
+      fputs($archivo," ; ");
+      fputs($archivo,"direccion");
+      fputs($archivo," ; ");
+      fputs($archivo,"telefono");
+
       fputs($archivo,"\n");
+
+      //--------------------------------
+
       //----------- --------------------------
       $rows=Proveedores::find()->all();
       foreach($rows as $row)
           {
                 fputs($archivo,$row->codigo);
-                fputs($archivo," ; ");
+                fputs($archivo,";");
                 fputs($archivo,Proveedores::getSubString($row->razon,100));
-                fputs($archivo," ; ");
+                fputs($archivo,";");
                 fputs($archivo,$row->tipo);
-                fputs($archivo," ; ");
+                fputs($archivo,";");
                 fputs($archivo,$row->cedrif);
-                fputs($archivo," ; ");
+                fputs($archivo,";");
                 fputs($archivo,'XXX');
+                fputs($archivo,";");
+                if (is_null($row->direccion))  fputs($archivo,'XXX'); else fputs($archivo,$row->direccion);
+                fputs($archivo,";");
+                if (($row->telefono==""))  fputs($archivo,'XXX'); else fputs($archivo,$row->telefono);
                 fputs($archivo,"\n");
 
 

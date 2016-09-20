@@ -131,6 +131,22 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 </div>
                                               </div>
 
+                                              <div class="profile-info-row">
+                                                <div class="profile-info-name"> Estatus </div>
+
+                                                <div class="profile-info-value">
+                                                  <span class="editable" id="username"><?= $model->getStatusHtml() ?></span>
+                                                  <?php
+                                                  if ($model->status==2) {
+                                                    echo '<span class="editable" id="username">Fecha de Anulación: ' . $model->fecha_process .'</span>';
+                                                  }
+                                                  if ($model->status==1) {
+                                                    echo '<span class="editable" id="username">Fecha de Procesamiento: ' . $model->fecha_process .'</span>';
+                                                  }
+                                                  ?>
+                                                </div>
+                                              </div>
+
                           </div>
 
 
