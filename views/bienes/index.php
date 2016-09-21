@@ -15,7 +15,7 @@ use  yii\helpers\Url;
 $this->title = Yii::t('app', 'Bienes');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="bienes-index">
+<div class="container">
     <?php Pjax::begin(); ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

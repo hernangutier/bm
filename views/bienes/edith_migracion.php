@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\select2\Select2;
 use yii\helpers\ArrayHelper;
+
 use \kartik\switchinput\SwitchInput;
 use yii\helpers\Url;
 
