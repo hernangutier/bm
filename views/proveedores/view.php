@@ -50,10 +50,9 @@ $this->params['breadcrumbs'][] = $this->title;
       												<i class="ace-icon fa fa-pencil-square-o align-top bigger-125"></i>
       												Actualizar
       </a>
-      <a href="http://rncenlinea.snc.gob.ve/reportes/resultado_busqueda?p=1&rif=<?= str_replace(("-"),"",$model->cedrif) ?>&search=RIF" class="btn btn-info">
-      												<i class="ace-icon fa fa-pencil-square-o align-top bigger-125"></i>
-      												Verificar RNC
-      </a>
+
+      <a href="http://rncenlinea.snc.gob.ve/reportes/resultado_busqueda?p=1&rif=<?= str_replace(("-"),"",$model->cedrif) ?>&search=RIF" class="btn btn-info" target="_blank" onclick="window.open(this.href,this.target,'width=1000,height=1000,top=200,left=200,toolbar=no,location=no,status=no,menubar=no');return false;"><i class="ace-icon fa fa-pencil-square-o align-top bigger-125"></i> Verificar RNC</a>
+
       </div>
   </div>
 
