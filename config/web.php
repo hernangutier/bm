@@ -4,6 +4,7 @@ $params = require(__DIR__ . '/params.php');
 
 $config = [
     'id' => 'basic',
+    'name'=>"Axus",
     'basePath' => dirname(__DIR__),
     'language'=>'es',
     'bootstrap' => ['log'],
@@ -15,7 +16,7 @@ $config = [
           // message source
           // 'downloadAction' => 'gridview/export/download',
           // 'i18n' => []
-      ],  
+      ],
 
         'request' => [
 
