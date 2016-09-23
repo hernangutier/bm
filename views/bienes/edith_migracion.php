@@ -47,6 +47,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
    ?>
 
+   
+
    <?php //-------------- Contactos -------------
 
      echo $form->field($model, 'codcolor')->widget(Select2::classname(), [

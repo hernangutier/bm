@@ -19,7 +19,11 @@ use app\models\LoginForm;
 
 <?php
     //-------------- Codigo para Desabilitar Cahe del Navegador -----
-        
+
+        $fieldOptions1 = [
+        'options' => ['class' => 'form-group has-feedback'],
+        'inputTemplate' => "{input}<span class='glyphicon glyphicon-envelope form-control-feedback'></span>"
+        ];
 
         $fieldOptions2 = [
             'options' => ['class' => 'block input-icon input-icon-right'],
@@ -28,32 +32,64 @@ use app\models\LoginForm;
 
  ?>
 
-<div class="login-container">
-							<div class="center">
-                <h1>
-                <i class="ace-icon fa fa-leaf green"></i>
-                <span class="red">Ace</span>
-                <span class="white" id="id-text2">Sistema de Bienes</span>
-              </h1>
+ <div class="main-container">
+     <div class="main-content">
+       <div class="row">
+         <div class="col-sm-12 col-sm-offset-1">
+           <div class="login-container">
+             <div class="center">
+               <h1>
+                 <i class="ace-icon fa fa-leaf green"></i>
+                 <span class="red">Axus</span>
+                 <span class="grey" id="id-text2">-Bienes</span>
+               </h1>
+               <h4 class="blue" id="id-company-text">&copy; Procuraduria General del Estado Barinas</h4>
+               <div class="space-6"></div>
+
+							<div class="position-relative">
+								<div id="login-box" class="login-box visible widget-box no-border">
+									<div class="widget-body">
+										<div class="widget-main">
+											<h4 class="header blue lighter bigger">
+												<i class="ace-icon fa fa-coffee green"></i>
+												ingrese sus credenciales...
+											</h4>
+
+											<div class="space-6"></div>
+
+                      <?php $form = ActiveForm::begin(); ?>
+
+                      <?= $form
+                          ->field($model, 'username', $fieldOptions1)
+                          ->label(false)
+                          ->textInput(['placeholder' => $model->getAttributeLabel('username')]) ?>
+
+                      <?= $form
+                          ->field($model, 'password', $fieldOptions2)
+                          ->label(false)
+                          ->passwordInput(['placeholder' => $model->getAttributeLabel('password')]) ?>
 
 
-							</div>
-              <?php $form = ActiveForm::begin(); ?>
+                <div class="space"></div>
 
-                <?php
-                      echo 'Hola ' .$model->username;
-                 ?>
-
+                <div class="clearfix">
+                    <?= Html::submitButton('<i class="ace-icon fa fa-key"></i> <span class="bigger-110">Entrar</span>', ['class' => 'width-35 pull-right btn btn-sm btn-primary', 'name' => 'login-button']) ?>
+                </div>
 
 
 
-                  <div class="form-group">
-                      <div class="col-lg-offset-1 col-lg-11">
-                          <?= Html::submitButton('Procesar', ['class' => 'width-35 pull-right btn btn-sm btn-primary', 'name' => 'login-button']) ?>
-                      </div>
-                  </div>
 
-              <?php ActiveForm::end(); ?>
+                      <?php ActiveForm::end(); ?>
 
 
+
+             </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
