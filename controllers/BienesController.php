@@ -11,6 +11,9 @@ use yii\filters\VerbFilter;
 use app\models\DesincorporacionesDt;
 use app\models\MovimientosDt;
 use app\models\Seguros;
+use app\models\SdbModelos;
+use yii\helpers\Json;
+use yii\helpers\Html;
 /**
  * BienesController implements the CRUD actions for Bienes model.
  */
@@ -77,6 +80,39 @@ class BienesController extends Controller
             'model' => $this->findModel($id),
         ]);
     }
+
+    public function actionModelos() {
+
+                     $out = [];
+                  if (isset($_POST['depdrop_parents'])) {
+                       $parents = $_POST['depdrop_parents'];
+                      if ($parents != null) {
+                          $id = $parents[0];
+
+
+                      $list = SdbModelos::find()->Where(['cod_segun_cat'=>$id])->asArray()->all();
+                      $selected  = null;
+                      if ($id != null && count($list) > 0) {
+                          $selected = '';
+                          foreach ($list as $i => $account) {
+                              $out[] = ['id' => $account['cod'], 'name' => $account['descripcion']];
+                              if ($i == 0) {
+                                  $selected = $account['cod'];
+                              }
+                          }
+
+                          // Shows how you can preselect a value
+                          echo Json::encode(['output' => $out, 'selected'=>$selected]);
+                          return;
+                      }
+                  }
+              }
+                  echo Json::encode(['output' => '', 'selected'=>'']);
+  }
+
+
+
+
 
     public function actionFind()
         {

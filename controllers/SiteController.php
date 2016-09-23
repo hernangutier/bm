@@ -11,30 +11,31 @@ use app\models\ContactForm;
 
 class SiteController extends Controller
 {
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['logout'],
-                'rules' => [
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
-        ];
-    }
 
 
+
+  public function behaviors()
+  {
+      return [
+          'access' => [
+              'class' => AccessControl::className(),
+              'only' => ['logout'],
+              'rules' => [
+                  [
+                      'actions' => ['logout'],
+                      'allow' => true,
+                      'roles' => ['@'],
+                  ],
+              ],
+          ],
+          'verbs' => [
+              'class' => VerbFilter::className(),
+              'actions' => [
+                  'logout' => ['post'],
+              ],
+          ],
+      ];
+  }
 
     public function actions()
     {
@@ -48,6 +49,8 @@ class SiteController extends Controller
             ],
         ];
     }
+
+
 
     public function actionIndexmaestros(){
         //$this->layout='layoutMaestros';
@@ -68,6 +71,7 @@ class SiteController extends Controller
     public function actionIndex()
     {
       if (!\Yii::$app->user->isGuest){
+         $session = Yii::$app->session;
          return $this->render('index');
     } else {
 

@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\select2\Select2;
 use yii\helpers\ArrayHelper;
-
+use kartik\widgets\DepDrop;
 use \kartik\switchinput\SwitchInput;
 use yii\helpers\Url;
 
@@ -47,7 +47,23 @@ $this->params['breadcrumbs'][] = $this->title;
 
    ?>
 
-   
+
+   <?=
+                        $form->field($model, 'codmodelo')->widget(DepDrop::classname(), [
+                        //'data'=> [6=>'Bank'],
+                        //'options' => ['placeholder' => 'Seleccione Dependencia'],
+                        'type' => DepDrop::TYPE_SELECT2,
+                        'select2Options'=>['pluginOptions'=>['allowClear'=>true]],
+                        'pluginOptions'=>[
+
+                            'depends'=>[Html::getInputId($model, 'codcat')],
+                            'url' => Url::to(['modelos']),
+                            'loadingText' => 'Cargando Modelos',
+
+                        ]
+    ]); ?>
+
+
 
    <?php //-------------- Contactos -------------
 

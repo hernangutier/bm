@@ -144,6 +144,7 @@ class Bienes extends \yii\db\ActiveRecord
             'is_asegurable' => 'Es Asegurable',
             'codcolor'=>'Color',
             'pend_in_mov'=>'Pendiente en Movimiento',
+            'codmodelo'=>'Modelo',
         ];
     }
 
