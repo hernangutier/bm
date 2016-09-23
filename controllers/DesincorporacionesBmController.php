@@ -66,7 +66,7 @@ class DesincorporacionesBmController extends Controller
       $model=$this->findmodel($id);
       $model->status=1;
 
-      if ($model->load(Yii::$app->request->post()) &&  $model->validate() && $model->save()) {
+      if ($model->load(Yii::$app->request->post())  && $model->save()) {
           return $this->render('/Autorizate/finish',['url'=>Url::toRoute('desincorporaciones-bm/index')]);
 
       } else {
