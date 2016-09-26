@@ -268,6 +268,12 @@ class Bienes extends \yii\db\ActiveRecord
         return Yii::$app->db->createCommand($sql)->queryAll();
     }
 
+  public static function getListSqlModelosMarcas($id){
+      $sql="SELECT  m.cod,(ma.denominacion || ' -> ' || m.descripcion) as descripcion
+              from sdb_modelos m inner join sdb_marcas ma on m.codmarca=ma.cod and m.cod_segun_cat=" . $id  ;
+        return Yii::$app->db->createCommand($sql)->queryAll();
+    }
+
     public static function getListSqlActivesNoAsegurados(){
       $sql="SELECT  * from vw_bienes_no_asegurados";
         return Yii::$app->db->createCommand($sql)->queryAll();

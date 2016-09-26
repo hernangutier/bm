@@ -79,7 +79,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 
-                                              </div>
+                              </div>
 
                         <h4 class="blue">
 
@@ -104,6 +104,8 @@ $this->params['breadcrumbs'][] = $this->title;
                          <p>
                              <?= Html::a(Yii::t('app', 'Crear Modelo'), ['sdb-modelos/create','id'=>$model->cod], ['class' => 'btn btn-success']) ?>
                          </p>
+
+                      <div class="container">
 
 
                         <?= GridView::widget([
@@ -169,4 +171,3 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
       </div>
-      

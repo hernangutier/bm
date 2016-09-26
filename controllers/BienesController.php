@@ -81,34 +81,46 @@ class BienesController extends Controller
         ]);
     }
 
+
+    public function getModelosMarca($id){
+      //----------- Consultamos en Sql a los MOdelos Marca ------
+
+    }
+
     public function actionModelos() {
+      $out = [];
+                   if (isset($_POST['depdrop_parents'])) {
+                        $parents = $_POST['depdrop_parents'];
+                       if ($parents != null) {
+                           $id = $parents[0];
 
-                     $out = [];
-                  if (isset($_POST['depdrop_parents'])) {
-                       $parents = $_POST['depdrop_parents'];
-                      if ($parents != null) {
-                          $id = $parents[0];
+
+                       $list = Bienes::getListSqlModelosMarcas($id);
+                       $selected  = null;
+                       if ($id != null && count($list) > 0) {
+                           $selected = '';
+                           foreach ($list as $i => $account) {
+                               $out[] = ['id' => $account['cod'], 'name' => $account['descripcion']];
+                               if ($i == 0) {
+                                   $selected = $account['cod'];
+                               }
+                           }
+
+                           // Shows how you can preselect a value
+                           echo Json::encode(['output' => $out, 'selected'=>$selected]);
+                           return;
+                       }
+                   }
+               }
+                   echo Json::encode(['output' => '', 'selected'=>'']);
+   }
 
 
-                      $list = SdbModelos::find()->Where(['cod_segun_cat'=>$id])->asArray()->all();
-                      $selected  = null;
-                      if ($id != null && count($list) > 0) {
-                          $selected = '';
-                          foreach ($list as $i => $account) {
-                              $out[] = ['id' => $account['cod'], 'name' => $account['descripcion']];
-                              if ($i == 0) {
-                                  $selected = $account['cod'];
-                              }
-                          }
 
-                          // Shows how you can preselect a value
-                          echo Json::encode(['output' => $out, 'selected'=>$selected]);
-                          return;
-                      }
-                  }
-              }
-                  echo Json::encode(['output' => '', 'selected'=>'']);
-  }
+
+
+
+
 
 
 
