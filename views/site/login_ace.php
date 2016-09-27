@@ -66,7 +66,26 @@ use yii\helpers\ArrayHelper;
                       </div>
                   </div>
 
+
+
               <?php ActiveForm::end(); ?>
 
 
+
 </div>
+
+<div class="toolbar clearfix">
+        <div>
+          <a href="#" data-target="#forgot-box" class="forgot-password-link">
+            <i class="ace-icon fa fa-arrow-left"></i>
+            I forgot my password
+          </a>
+        </div>
+
+        <div>
+          <a href="#" data-target="#signup-box" class="user-signup-link">
+            Registrarme
+            <i class="ace-icon fa fa-arrow-right"></i>
+          </a>
+        </div>
+  </div>

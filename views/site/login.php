@@ -85,9 +85,27 @@ use app\models\LoginForm;
 
              </div>
         </div>
+        <div class="toolbar clearfix">
+                <div>
+                  <a href="#" data-target="#forgot-box" class="forgot-password-link">
+                    <i class="ace-icon fa fa-arrow-left"></i>
+                    Recuperar passsword...
+                  </a>
+                </div>
+
+                <div>
+                  <a href="<?= Url::to(['site/signup']) ?>" data-target="#signup-box" class="user-signup-link">
+                    Registrarme...
+                    <i class="ace-icon fa fa-arrow-right"></i>
+                  </a>
+                </div>
+          </div>
     </div>
+
 </div>
+
 </div>
+
 </div>
 </div>
 </div>

@@ -23,13 +23,16 @@ use yii\helpers\Security;
  * @property integer $created_at
  * @property integer $updated_at
  * @property integer $role_id
- * @property integer $status_id
+
  * @property integer $user_type_id
  * @property string $password
  */
 class User extends \yii\db\ActiveRecord implements IdentityInterface
 {
   const STATUS_ACTIVE = 10;
+  const STATUS_PENDIENTE = 20;
+  const STATUS_RECHAZADO = 30;
+  const STATUS_INHABILITADO = 40;
 
 
               public static function tableName()
@@ -93,7 +96,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
               */
               public static function findIdentity($id)
               {
-              return static::findOne(['id' => $id, 'status_id' => self::STATUS_ACTIVE]);
+              return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
               }
               /**
               * @findIdentityByAccessToken
@@ -110,7 +113,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
               */
               public static function findByUsername($email)
               {
-              return static::findOne(['email' => $email, 'status_id' =>
+              return static::findOne(['email' => $email, 'status' =>
                           self::STATUS_ACTIVE]);
               }
               /**
@@ -122,16 +125,16 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
               public static function findByPasswordResetToken($token)
               {
               $expire = Yii::$app->params['user.passwordResetTokenExpire'];
-              $parts = explode('_', $token);
-              $timestamp = (int) end($parts);
-              if ($timestamp + $expire < time()) {
-              // token expired
-              return null;
-              }
-              return static::findOne([
-              'password_reset_token' => $token,
-              'status_id' => self::STATUS_ACTIVE,
-              ]);
+                      $parts = explode('_', $token);
+                              $timestamp = (int) end($parts);
+                                  if ($timestamp + $expire < time()) {
+                                      // token expired
+                                      return null;
+                                }
+                              return static::findOne([
+                                  'password_reset_token' => $token,
+                                  'status_id' => self::STATUS_ACTIVE,
+                              ]);
               }
               /**
 
@@ -162,8 +165,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
               */
               public function validatePassword($password)
               {
-                  return true;
-                //return Yii::$app->security->validatePassword($password, $this->password_hash);
+                  return Yii::$app->security->validatePassword($password, Yii::$app->security->generatePasswordHash($password));
               }
               /**
               * Generates password hash from password and sets it to the model
@@ -172,6 +174,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
               */
               public function setPassword($password)
               {
+
                 $this->password_hash = Yii::$app->security->generatePasswordHash($password);
               }
               /**
@@ -198,4 +201,27 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
               {
               $this->password_reset_token = null;
               }
-              }
+
+
+
+              //------------ Metodos nuevos de la Guia -------------------------
+                public function getRole()
+                {
+                    return $this->hasOne(Role::className(), ['id' => 'role_id']);
+                }
+
+                public function getRoleName()
+                {
+                    return $this->role ? $this->role->role_name : '- No Asignado -';
+                }
+
+                                /**
+                * get list of roles for dropdown
+                */
+                public static function getRoleList()
+                {
+                    $droptions = Role::find()->asArray()->all();
+                    return Arrayhelper::map($droptions, 'role_value', 'role_name');
+                }
+              //----------------------------------------------------------------
+}

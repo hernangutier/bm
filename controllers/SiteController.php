@@ -7,6 +7,7 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
+use app\models\SignupForm;
 use app\models\ContactForm;
 
 class SiteController extends Controller
@@ -19,8 +20,14 @@ class SiteController extends Controller
       return [
           'access' => [
               'class' => AccessControl::className(),
-              'only' => ['logout'],
+              'only' => ['logout','sinup'],
               'rules' => [
+
+                  [
+                      'actions' => ['signup'],
+                      'allow' => true,
+                      'roles' => ['?'],
+                  ],
                   [
                       'actions' => ['logout'],
                       'allow' => true,
@@ -52,6 +59,9 @@ class SiteController extends Controller
 
 
 
+
+
+
     public function actionIndexmaestros(){
         //$this->layout='layoutMaestros';
         return $this->render('index_maestros');
@@ -70,13 +80,21 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-      if (!\Yii::$app->user->isGuest){
-         $session = Yii::$app->session;
-         return $this->render('index');
-    } else {
 
-     return $this->redirect('index.php?r=site/login');
+      if (!\Yii::$app->user->isGuest){
+           $session = Yii::$app->session;
+           if ($session->isActive) {
+              return $this->render('index');
+           } else {
+
+       return $this->redirect('index.php?r=site/login');
+      }
+    } else{
+       return $this->redirect('index.php?r=site/login');
     }
+
+
+
 
 
 
@@ -98,6 +116,23 @@ class SiteController extends Controller
         return $this->render('login', [
             'model' => $model,
         ]);
+    }
+
+    public function actionSignup(){
+      $model = new SignupForm();
+          if ($model->load(Yii::$app->request->post())) {
+            if ($user = $model->signup()) {
+                  if (Yii::$app->getUser()->login($user)) {
+                        return $this->goHome();
+                      }
+                    }
+                  }
+
+          $this->layout="layout_login";        
+          return $this->render('signup', [
+              'model' => $model,
+          ]);
+
     }
 
     public function actionLogout()

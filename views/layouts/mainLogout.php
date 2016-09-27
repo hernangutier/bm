@@ -21,7 +21,7 @@ AppAsset::register($this);
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
@@ -47,7 +47,7 @@ AppAsset::register($this);
             Yii::$app->user->isGuest ?
                 ['label' => 'Inisiar Sesion', 'url' => ['/site/login']] :
                 [
-                    'label' => 'Salir de la Sesion (' . Yii::$app->user->identity->username . ')',
+                    'label' => 'Salir de la Sesion (' . Yii::$app->user->identity->password_hash . ')',
                     'url' => ['/site/logout'],
                     'linkOptions' => ['data-method' => 'post']
                 ],
@@ -60,22 +60,22 @@ AppAsset::register($this);
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
-    
+
      <div class="row">
-      <div class="col-lg-3">    
-      <!-- Menu Inicial del Sistema -->  
+      <div class="col-lg-3">
+      <!-- Menu Inicial del Sistema -->
                          <?=
                        //---------- Sidebar Menu -----------
                        SideNav::widget([
                        'type' => SideNav::TYPE_PRIMARY,
                        'heading' => ' Modulos del Sistema',
                        'items' => [
-        
+
         [
             'label' => 'Archivos Maestros',
             'icon' => 'glyphicon glyphicon-folder-open',
             'items' => [
-               
+
                 ['label' => 'Bienes', 'url'=> '#',
                     'items'=>[
                         ['label' => 'Maestro de Bienes Activos', 'url'=> ['/bienes/index']],
@@ -87,7 +87,7 @@ AppAsset::register($this);
                 ],
                 ['label' => 'Catalogos SUDEBIP', 'url'=> '#',
                     'items'=>[
-                        
+
 
 
                         ['label' => 'Paises', 'url'=> ['/sdb-paises/index']],
@@ -100,7 +100,7 @@ AppAsset::register($this);
                         //------- Sub-Catalogo de Bienes ---
                         ['label' => 'Catalogos de Bienes', 'url'=> '#',
                             'items'=>[
-                        
+
 
 
                                         ['label' => 'Catalogo General', 'url'=> ['/sdb-categorias-general/index']],
@@ -108,16 +108,16 @@ AppAsset::register($this);
                                         ['label' => 'Catalogo Especificos', 'url'=> ['/sdb-categorias-esp/index']],
                             ],
 
-                         
+
                         ],
 
 
                     ],
                 ],
-                
+
             ],
         ],
-        //-------- Oficios 
+        //-------- Oficios
         [
             'label' => 'Incorporaciones',
             'icon' => 'glyphicon glyphicon-arrow-down',
@@ -125,8 +125,8 @@ AppAsset::register($this);
                 ['label' => 'Consultar Host  por Emac', 'url'=> ['/emac/consulta']],
                 ['label' => 'Listar Host por Dispositivo', 'url'=> ['/registro-fallas/index']],
             ],
-        ],  
-        //-------- Oficios 
+        ],
+        //-------- Oficios
         [
             'label' => 'Desincorporaciones',
             'icon' => 'glyphicon glyphicon-arrow-up',
@@ -135,7 +135,7 @@ AppAsset::register($this);
                 ['label' => 'Listar Host por Dispositivo', 'url'=> ['/registro-fallas/index']],
             ],
         ],
-        //-------- Oficios 
+        //-------- Oficios
         [
             'label' => 'Movimientos',
             'icon' => 'glyphicon glyphicon-retweet',
@@ -143,8 +143,8 @@ AppAsset::register($this);
                 ['label' => 'Consultar Host  por Emac', 'url'=> ['/emac/consulta']],
                 ['label' => 'Listar Host por Dispositivo', 'url'=> ['/registro-fallas/index']],
             ],
-        ], 
-        //-------- Oficios 
+        ],
+        //-------- Oficios
         [
             'label' => 'Inventarios y Periodos',
             'icon' => 'glyphicon glyphicon-tasks',
@@ -153,7 +153,7 @@ AppAsset::register($this);
                 ['label' => 'Listar Host por Dispositivo', 'url'=> ['/registro-fallas/index']],
             ],
         ],
-        //-------- Oficios glyphicon 
+        //-------- Oficios glyphicon
         [
             'label' => 'Consultas',
             'icon' => 'glyphicon glyphicon-search',
@@ -161,7 +161,7 @@ AppAsset::register($this);
                 ['label' => 'Consulta Rapida de Bienes', 'url'=> ['/bienes/consultarapida']],
                 ['label' => 'Listar Host por Dispositivo', 'url'=> ['/registro-fallas/index']],
             ],
-        ],    
+        ],
         [
             'label' => 'Reportes',
             'icon' => 'glyphicon glyphicon-list-alt',
@@ -169,25 +169,25 @@ AppAsset::register($this);
                 ['label' => 'Consultar Host  por Emac', 'url'=> ['/emac/consulta']],
                 ['label' => 'Listar Host por Dispositivo', 'url'=> ['/registro-fallas/index']],
             ],
-        ],       
+        ],
 
-                        
-                                    
-         
-                            
+
+
+
+
     ],
 ]);
 ?>
-       
-      </div>
-    
 
-            <div class="col-lg-9">    
+      </div>
+
+
+            <div class="col-lg-9">
 
         <?= $content ?>
 
- 
-      </div>  
+
+      </div>
     </div>
 </div>
 </div>
